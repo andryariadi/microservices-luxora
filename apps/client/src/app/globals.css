@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@theme {
+  /* --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; */
+
+  --color-dark-200: #475467;
+  --color-light-blue-100: #c1d3f81a;
+  --color-light-blue-200: #a7bff14d;
+
+  --color-badge-green: #d5faf1;
+  --color-badge-red: #f9e3e2;
+  --color-badge-yellow: #fceed8;
+
+  --color-badge-green-text: #254d4a;
+  --color-badge-red-text: #752522;
+  --color-badge-yellow-text: #73321b;
+
+  --font-archivo: "Archivo", sans-serif;
+  --font-roboto: "Roboto", sans-serif;
+  --font-sora: "Sora", sans-serif;
+  --font-urbanist: "Urbanist", sans-serif;
+}
+
+html,
+body {
+  @apply bg-white;
+  scroll-behavior: smooth;
+}
+
+main {
+  @apply min-h-screen py-16;
+}
+
+.container {
+  @apply w-full mx-auto sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-6xl;
+}
+
+label {
+  @apply text-dark-200;
+}

@@ -1,0 +1,107 @@
+commit 328241cc2f83186f175e25146608fb6f16c40fa8
+Author: Andry Ariadi <andryariadi23@gmail.com>
+Date:   Mon Aug 18 16:29:16 2025 +0800
+
+    refactor: merge client and admin into single repo
+
+commit 34e4e5a87980f9e27953d59628fd28e327bbb4b5
+Author: Andry Ariadi <andryariadi23@gmail.com>
+Date:   Fri Aug 15 23:18:59 2025 +0800
+
+    feat(useCartStore): add update and remove cart item
+
+commit fe059abdc3ec6891487cf10b15866d0a1f27072f
+Author: Andry Ariadi <andryariadi23@gmail.com>
+Date:   Fri Aug 15 15:03:05 2025 +0800
+
+    refactor(cartStore): handle zustand persist data on localstorage
+
+commit a7171be928ffcd3d7c5e19ae035c6ba4b0bbef12
+Author: Andry Ariadi <andryariadi23@gmail.com>
+Date:   Fri Aug 15 08:25:05 2025 +0800
+
+    refactor(cartStore): update function addToCart
+
+commit 0c222dacfdf06e544d621d7cd1a859594afe2778
+Author: Andry Ariadi <andryariadi23@gmail.com>
+Date:   Thu Aug 14 17:25:24 2025 +0800
+
+    refactor(useCartStore): update function addToCart
+
+commit 1cbaf2790280ced616511093aff3e35797c8e6cb
+Author: Andry Ariadi <andryariadi23@gmail.com>
+Date:   Thu Aug 14 15:19:35 2025 +0800
+
+    refactor(useCartStore): update function addToCart
+
+commit 0848205da31ee36f42c159f656219605f6cf5c08
+Author: Andry Ariadi <andryariadi23@gmail.com>
+Date:   Wed Aug 13 17:16:22 2025 +0800
+
+    feat(cartStore): add cart store for management state
+
+commit 5288ad9e95beb3e8dc7b54c1fd2a925b2d1977f4
+Author: Andry Ariadi <andryariadi23@gmail.com>
+Date:   Wed Aug 13 08:13:25 2025 +0800
+
+    feat(cart): add cardproductlist, shippingform and paymentform with styling
+
+commit 98f9b69a78e5c9e294a1bbb296abafbd6185eb5e
+Author: Andry Ariadi <andryariadi23@gmail.com>
+Date:   Tue Aug 12 17:33:08 2025 +0800
+
+    feat(productdetail): add product detail and product interction with styling
+
+commit 3d30dcce87d17689046580d0f3bf139c886a0994
+Author: Andry Ariadi <andryariadi23@gmail.com>
+Date:   Tue Aug 12 07:28:52 2025 +0800
+
+    feat(filter and notfound): add filter and notfound page component with styling
+
+commit b3306ef8bd719a83895defcb6839f198e8e91715
+Author: Andry Ariadi <andryariadi23@gmail.com>
+Date:   Tue Aug 12 06:40:45 2025 +0800
+
+    feat(categories): add categories component with styling
+
+commit fab7e37fde4b4123f6303d235907d3a1e9abf91b
+Author: Andry Ariadi <andryariadi23@gmail.com>
+Date:   Mon Aug 11 17:13:17 2025 +0800
+
+    style(productlist): update style productcard component
+
+commit fbf5eeba2218ad33dad7fb4f1dc009157962b967
+Author: Andry Ariadi <andryariadi23@gmail.com>
+Date:   Mon Aug 11 15:07:33 2025 +0800
+
+    feat(productlist): add productlist and productcard component with styling
+
+commit 2cf87ea87ea1ca565dde34ad1a120e6547bc8bb9
+Author: Andry Ariadi <andryariadi23@gmail.com>
+Date:   Mon Aug 11 13:49:32 2025 +0800
+
+    feat(herosection): add herosection component with styling
+
+commit c2d4a37294617ff5fadfa43adccf02696af382f5
+Author: Andry Ariadi <andryariadi23@gmail.com>
+Date:   Mon Aug 11 13:45:02 2025 +0800
+
+    feat(footer): add Footer component with styling
+
+commit efcdf9d95adc951f28a1f995edf2fc047da3f712
+Author: Andry Ariadi <andryariadi23@gmail.com>
+Date:   Mon Aug 11 08:09:58 2025 +0800
+
+    feat(navbar): add Navbar component with styling
+
+commit 9651fc449e8cc3d4ab5a1e8e6c484176cb4a9f0b
+Author: Andry Ariadi <andryariadi23@gmail.com>
+Date:   Mon Aug 11 07:03:08 2025 +0800
+
+    setup project
+
+commit cb4bba54fcff134b0f51c7ee5ccfcd20019c9abc
+Author: Andry Ariadi <andryariadi23@gmail.com>
+Date:   Mon Aug 11 06:14:51 2025 +0800
+
+    Initial commit from Create Next App
