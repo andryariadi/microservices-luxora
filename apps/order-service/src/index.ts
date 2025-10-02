@@ -6,6 +6,10 @@ const fastify = Fastify({
 
 const port = Number(process.env.PORT) || 8001;
 
+fastify.get("/health", async (request, reply) => {
+  reply.code(200).send({ status: "Ok", uptime: process.uptime(), timestamp: Date.now() });
+});
+
 const start = async () => {
   try {
     await fastify.listen({ port });
