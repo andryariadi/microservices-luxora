@@ -2,12 +2,15 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Bell, Home } from "lucide-react";
+import { Bell, Home, ShoppingBag } from "lucide-react";
 import SearchBar from "./SearchBar";
 import ShoppingCartIcon from "./ShoppingCartIcon";
 import { useEffect, useState } from "react";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
+  const router = useRouter();
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -45,7 +48,19 @@ const Navbar = () => {
 
           <ShoppingCartIcon />
 
-          <Link href="/login">Sign in</Link>
+          {/* <Link href  ="/login">Sign in</Link> */}
+
+          <SignedOut>
+            <SignInButton />
+          </SignedOut>
+
+          <SignedIn>
+            <UserButton>
+              <UserButton.MenuItems>
+                <UserButton.Action label="See Orders" labelIcon={<ShoppingBag size={14} />} onClick={() => router.push("/orders")} />
+              </UserButton.MenuItems>
+            </UserButton>
+          </SignedIn>
         </div>
       </nav>
     </header>
