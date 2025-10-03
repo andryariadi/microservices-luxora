@@ -1,6 +1,7 @@
 import { clerkMiddleware, getAuth } from "@hono/clerk-auth";
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
+import { authMiddleware } from "./middleware/authMiddleware.js";
 
 const app = new Hono();
 
@@ -10,19 +11,10 @@ app.get("/health", (c) => {
   return c.json({ status: "Ok", uptime: process.uptime(), timestamp: Date.now() }, 200);
 });
 
-app.get("/clerk", async (c) => {
-  const auth = getAuth(c);
-  const clerkClient = c.get("clerk");
+app.get("/clerk", authMiddleware, async (c) => {
+  const userId = c.get("userId");
 
-  console.log({ auth });
-
-  if (!auth?.isAuthenticated) {
-    return c.json({ error: "User not authenticated!" }, 401);
-  }
-
-  const user = await clerkClient.users.getUser(auth.userId);
-
-  return c.json({ message: "Authenticated payment service is running!", user }, 200);
+  return c.json({ message: "Authenticated payment service is running!", userId }, 200);
 });
 
 const start = async () => {

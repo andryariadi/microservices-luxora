@@ -1,5 +1,6 @@
 import Clerk from "@clerk/fastify";
-import Fastify from "fastify";
+import Fastify, { FastifyReply, FastifyRequest } from "fastify";
+import { authMiddleware } from "./middleware/authMiddleware.js";
 
 const fastify = Fastify({
   logger: true,
@@ -13,18 +14,8 @@ fastify.get("/health", async (request, reply) => {
   reply.code(200).send({ status: "Ok", uptime: process.uptime(), timestamp: Date.now() });
 });
 
-fastify.get("/clerk", async (request, reply) => {
-  const { isAuthenticated, userId } = Clerk.getAuth(request);
-
-  console.log({ isAuthenticated, userId });
-
-  if (!isAuthenticated) {
-    return reply.code(401).send({ error: "User not authenticated" });
-  }
-
-  const user = await Clerk.clerkClient.users.getUser(userId);
-
-  reply.code(200).send({ message: "Authenticated order service is running!", user });
+fastify.get("/clerk", { preHandler: [authMiddleware] }, async (request: FastifyRequest, reply: FastifyReply) => {
+  reply.code(200).send({ message: "Authenticated order service is running!", userId: request.userId });
 });
 
 const start = async () => {
