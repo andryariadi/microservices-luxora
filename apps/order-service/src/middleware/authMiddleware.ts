@@ -7,7 +7,7 @@ declare module "fastify" {
   }
 }
 
-export const authMiddleware = (request: FastifyRequest, reply: FastifyReply) => {
+export const authMiddleware = async (request: FastifyRequest, reply: FastifyReply) => {
   const { userId } = Clerk.getAuth(request);
 
   if (!userId) {
