@@ -27,6 +27,12 @@ app.get("/clerk", authMiddleware, async (req: Request, res: Response) => {
 app.use("/products", productRouter);
 app.use("/categories", categoryRouter);
 
+app.use((err: any, req: Request, res: Response, next: Function) => {
+  console.log(err, "<---errorInServer");
+
+  return res.status(err.status || 500).json({ message: err.message || "Internal Server Error!" });
+});
+
 app.listen(PORT, () => {
   console.log(`Product service is running on port ${PORT}`);
 });
