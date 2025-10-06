@@ -68,6 +68,63 @@ class Controller {
       data: product,
     });
   }
+
+  static async deleteProduct(req: Request, res: Response) {
+    const { id } = req.params;
+
+    const existingProduct = await prisma.product.findUnique({
+      where: { id },
+    });
+
+    if (!existingProduct) {
+      return res.status(404).json({
+        error: "Product not found!",
+      });
+    }
+
+    const product = await prisma.product.delete({
+      where: { id },
+    });
+
+    res.status(200).json({
+      message: "Product deleted successfully!",
+      data: product,
+    });
+  }
+
+  static async getProduct(req: Request, res: Response) {
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(400).json({
+        error: "Product ID is required!",
+      });
+    }
+
+    const product = await prisma.product.findUnique({
+      where: { id },
+      include: {
+        variants: true,
+        category: {
+          select: {
+            id: true,
+            name: true,
+            slug: true,
+          },
+        },
+      },
+    });
+
+    if (!product) {
+      return res.status(404).json({
+        error: "Product not found!",
+      });
+    }
+
+    res.status(200).json({
+      data: product,
+    });
+  }
 }
 
 export default Controller;
