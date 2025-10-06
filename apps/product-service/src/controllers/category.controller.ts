@@ -33,7 +33,10 @@ class Controller {
       data,
     });
 
-    return res.status(201).json(category);
+    return res.status(201).json({
+      message: "Category created successfully!",
+      data: category,
+    });
   }
 
   static async updateCategory(req: Request, res: Response) {
@@ -45,7 +48,10 @@ class Controller {
       data,
     });
 
-    return res.status(200).json(category);
+    return res.status(200).json({
+      message: "Category updated successfully!",
+      data: category,
+    });
   }
 
   static async deleteCategory(req: Request, res: Response) {
@@ -55,7 +61,10 @@ class Controller {
       where: { id },
     });
 
-    return res.status(200).json(category);
+    return res.status(200).json({
+      message: "Category deleted successfully!",
+      data: category,
+    });
   }
 }
 
