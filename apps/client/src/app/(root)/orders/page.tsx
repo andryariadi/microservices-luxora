@@ -9,12 +9,12 @@ const OrdersPage = async () => {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-    cache: "no-store",
+    // cache: "no-store",
   });
 
   const products = await data.json();
 
-  console.log({ products, token });
+  console.log({ token });
 
   return <section className="bg-sky-500 w-full mx-auto sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-6xl space-y-10">andry</section>;
 };

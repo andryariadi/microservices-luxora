@@ -1,6 +1,8 @@
 import Clerk from "@clerk/fastify";
 import Fastify from "fastify";
-import { authMiddleware } from "./middleware/authMiddleware.js";
+import { authUserMiddleware } from "./middleware/authMiddleware";
+import { orderRoute } from "./routes/order";
+import { connectOrderDB } from "@repo/order-db";
 
 const fastify = Fastify();
 
@@ -12,15 +14,19 @@ fastify.get("/health", async (request, reply) => {
   reply.code(200).send({ status: "Ok", uptime: process.uptime(), timestamp: Date.now() });
 });
 
-fastify.get("/clerk", { preHandler: authMiddleware }, (request, reply) => {
+fastify.get("/clerk", { preHandler: authUserMiddleware }, (request, reply) => {
   reply.code(200).send({ message: "Authenticated order service is running!", userId: request.userId });
 });
 
+fastify.register(orderRoute);
+
 const start = async () => {
   try {
+    await connectOrderDB();
     await fastify.listen({ port });
     console.log(`Order service is running on port ${port}`);
   } catch (err) {
+    console.log(err);
     fastify.log.error(err);
     process.exit(1);
   }

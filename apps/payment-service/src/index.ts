@@ -1,7 +1,7 @@
 import { clerkMiddleware, getAuth } from "@hono/clerk-auth";
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
-import { authMiddleware } from "./middleware/authMiddleware.js";
+import { authUserMiddleware } from "./middleware/authMiddleware";
 
 const app = new Hono();
 
@@ -11,7 +11,7 @@ app.get("/health", (c) => {
   return c.json({ status: "Ok", uptime: process.uptime(), timestamp: Date.now() }, 200);
 });
 
-app.get("/clerk", authMiddleware, async (c) => {
+app.get("/clerk", authUserMiddleware, async (c) => {
   const userId = c.get("userId");
 
   return c.json({ message: "Authenticated payment service is running!", userId }, 200);
