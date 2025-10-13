@@ -4,7 +4,9 @@ import { Order } from "@repo/order-db";
 
 export const orderRoute = async (fastify: FastifyInstance) => {
   fastify.get("/user-orders", { preHandler: authUserMiddleware }, async (request, reply) => {
-    const orders = await Order.find({ userId: request.userId });
+    const { userId } = request;
+
+    const orders = await Order.find({ userId });
 
     reply.code(200).send({ orders });
   });
