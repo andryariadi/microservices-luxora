@@ -23,7 +23,7 @@ export const getStripeProductPrice = async (productId: string) => {
       product: productId,
     });
 
-    return res;
+    return res.data[0]?.unit_amount;
   } catch (error) {
     console.log(error, "<--getStripeProductPrice");
   }
