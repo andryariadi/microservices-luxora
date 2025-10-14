@@ -8,7 +8,7 @@ import ShippingForm from "./ShippingForm";
 import PaymentForm from "./PaymentForm";
 import CartProductList from "./CartProductList";
 import { useState } from "react";
-import { ShippingFormInputs } from "@/libs/types";
+import { ShippingFormInputs } from "@repo/types";
 
 const StepsCart = () => {
   const searchParams = useSearchParams();

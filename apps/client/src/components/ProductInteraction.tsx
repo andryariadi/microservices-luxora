@@ -1,7 +1,7 @@
 "use client";
 
 import useCartStore from "@/libs/stores/cartStore";
-import { ProductType } from "@/libs/types";
+import { CartItemType, ProductType } from "@repo/types";
 import { Minus, Plus, ShoppingCart } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -37,13 +37,15 @@ const ProductInteraction = ({ product, selectedSize, selectedColor }: { product:
   };
 
   const handleAddToCart = () => {
-    addToCart({
+    const cartItem: CartItemType = {
       ...product,
       variantId: `${product.id}-${selectedSize}-${selectedColor}`,
       quantity,
       selectedColor,
       selectedSize,
-    });
+    } as CartItemType;
+
+    addToCart(cartItem);
   };
 
   console.log({ product, cart }, "<---postInteraction");

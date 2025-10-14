@@ -6,9 +6,9 @@ const ProductDetailPage = async ({ params, searchParams }: { params: Promise<{ i
   const { id } = await params;
   const { color, size } = await searchParams;
 
-  const product = products.find((product) => product.id === Number(id));
+  const product = products.find((product) => product.id === id);
 
-  if (!product) return <div>Product not found</div>;
+  if (!product) return <div className="min-h-[calc(100vh-64px)] flex items-center justify-center">Product not found</div>;
 
   const selectedSize = size || (product?.availableSizes[0] as string);
   const selectedColor = color || (product?.availableColors[0] as string);
@@ -17,7 +17,7 @@ const ProductDetailPage = async ({ params, searchParams }: { params: Promise<{ i
     <section className="b-amber-500 container flex flex-col md:flex-row items-start md:gap-10 pt-10">
       {/* Left - Product Image */}
       <div className="w-full lg:w-5/12 relative aspect-[2/3]">
-        <Image src={product.avaliableimages[selectedColor]!} alt={product.name} fill className="object-contain rounded-md" />
+        <Image src={product.availableImages?.[selectedColor] ?? ""} alt={product.name} fill className="object-contain rounded-md" />
       </div>
 
       {/* Right - Product Detail */}

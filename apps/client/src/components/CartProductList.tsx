@@ -1,8 +1,7 @@
 "use client";
 
 import useCartStore from "@/libs/stores/cartStore";
-import { CartItemType } from "@/libs/types";
-// import { cartItems } from "@/libs/constant";
+import { CartItemType } from "@repo/types";
 import { Minus, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
 
@@ -29,7 +28,7 @@ const CartProductList = () => {
               <div className="b-sky-600 w-full flex gap-8">
                 {/* Product Image */}
                 <div className="relative w-32 h-32 bg-gray-50 rounded-lg overflow-hidden">
-                  <Image src={item.avaliableimages[item.selectedColor] as string} alt={item.name} fill className="object-contain hover:scale-125 transition-all duration-300" />
+                  <Image src={item.availableImages?.[item.selectedColor] ?? ""} alt={item.name} fill className="object-contain hover:scale-125 transition-all duration-300" />
                 </div>
 
                 {/* Product Details */}

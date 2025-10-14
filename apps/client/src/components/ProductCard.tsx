@@ -1,16 +1,16 @@
 "use client";
 
 import useCartStore from "@/libs/stores/cartStore";
-import { ProductType } from "@/libs/types";
 import { ChevronDown, ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { ProductType } from "@repo/types";
 
 const ProductCard = ({ product }: { product: ProductType }) => {
   const [productTypes, setProductTypes] = useState({
-    size: product.availableSizes[0],
-    color: product.availableColors[0],
+    size: product.availableSizes[0] || "",
+    color: product.availableColors[0] || "",
   });
 
   const { addToCart, cart } = useCartStore();
@@ -40,7 +40,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
       <figure className="overflow-hidden">
         <Link href={`/products/${product.id}`}>
           <div className="relative aspect-[3/4]">
-            <Image src={product.avaliableimages[productTypes.color]!} alt={product.name} fill className="object-cover hover:scale-105 transition-all duration-500" />
+            <Image src={product.availableImages?.[productTypes.color] || ""} alt={product.name} fill className="object-cover hover:scale-105 transition-all duration-500" />
           </div>
         </Link>
       </figure>

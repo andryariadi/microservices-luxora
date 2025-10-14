@@ -1,11 +1,11 @@
 import { create } from "zustand";
-import { CartItemType, CartStoreActionsType, CartStoreStateType } from "../types";
 import { toast } from "react-toastify";
 import { createJSONStorage, persist } from "zustand/middleware";
+import { CartStoreActionsType, CartStoreStateType } from "@repo/types";
 
 const useCartStore = create<CartStoreStateType & CartStoreActionsType>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       cart: [],
       hasHydrated: false,
       addToCart: (product) => {

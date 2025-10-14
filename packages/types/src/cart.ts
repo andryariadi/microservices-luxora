@@ -1,7 +1,8 @@
-import { Product } from "@repo/product-db";
 import z from "zod";
+import { ProductType } from "./product";
 
-export type CartItemType = Product & {
+export type CartItemType = ProductType & {
+  variantId: string;
   quantity: number;
   selectedSize: string;
   selectedColor: string;
@@ -19,9 +20,9 @@ export type CartStoreStateType = {
 
 export type CartStoreActionsType = {
   addToCart: (product: CartItemType) => void;
-  updateQuantity: (product: CartItemType) => void;
-  removeFromCart: (product: CartItemType) => void;
-  clearCart: () => void;
+  updateQuantity: (variantId: string, quantity: number) => void;
+  removeFromCart: (variantId: string) => void;
+  // clearCart: () => void;
 };
 
 export const shippingFormSchema = z.object({
@@ -35,4 +36,4 @@ export const shippingFormSchema = z.object({
   city: z.string().min(1, "City is required!"),
 });
 
-export type ShippingFormInput = z.infer<typeof shippingFormSchema>;
+export type ShippingFormInputs = z.infer<typeof shippingFormSchema>;

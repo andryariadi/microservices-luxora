@@ -1,4 +1,4 @@
-import type { Category, Product } from "@repo/product-db";
+import type { Category, Product, ProductVariant } from "@repo/product-db";
 import z from "zod";
 
 export const colors = ["blue", "green", "red", "yellow", "purple", "orange", "pink", "brown", "gray", "black", "white"] as const;
@@ -17,6 +17,16 @@ export const ProductFormSchema = z
     availableImages: z.record(z.string(), z.string(), {
       message: "Image for each color is required!",
     }),
+    variants: z
+      .array(
+        z.object({
+          size: z.string(),
+          color: z.string(),
+          stock: z.number().min(0, { message: "Stock cannot be negative!" }),
+          price: z.number().min(1, { message: "Price is required!" }),
+        })
+      )
+      .optional(),
   })
   .refine(
     (data) => {
@@ -30,7 +40,10 @@ export const ProductFormSchema = z
     }
   );
 
-export type ProductType = Product;
+export type ProductType = Product & {
+  variants?: ProductVariant[];
+  availableImages: Record<string, string> | null; // Override JsonValue from prisma with specific type
+};
 
 export type ProductsType = ProductType[];
 
