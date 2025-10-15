@@ -11,8 +11,6 @@ export type CartItemType = ProductType & {
   remainingStock?: number;
 };
 
-export type CartType = CartItemType[];
-
 export type CartStoreStateType = {
   cart: CartItemType[];
   hasHydrated: boolean;

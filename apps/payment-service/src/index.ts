@@ -3,10 +3,13 @@ import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 import { authUserMiddleware } from "./middleware/authMiddleware";
 import stripe from "./utils/stripe";
+import sessionRoute from "./routes/session.route";
+import { cors } from "hono/cors";
 
 const app = new Hono();
 
 app.use("*", clerkMiddleware());
+app.use("*", cors({ origin: ["http://localhost:3002"], credentials: true }));
 
 app.get("/health", (c) => {
   return c.json({ status: "Ok", uptime: process.uptime(), timestamp: Date.now() }, 200);
@@ -20,11 +23,11 @@ app.get("/clerk", authUserMiddleware, async (c) => {
 
 app.post("/create-stripe-product", authUserMiddleware, async (c) => {
   const res = await stripe.products.create({
-    id: "12345",
-    name: "Andry",
+    id: "3",
+    name: "Nike Air Essentials Pullover",
     default_price_data: {
       currency: "usd",
-      unit_amount: 10 * 100,
+      unit_amount: 6990 * 100,
     },
   });
 
@@ -38,6 +41,8 @@ app.get("/stripe-product-price", async (c) => {
 
   return c.json(res);
 });
+
+app.route("/session", sessionRoute);
 
 const start = async () => {
   try {

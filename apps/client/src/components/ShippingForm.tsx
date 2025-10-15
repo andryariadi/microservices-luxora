@@ -30,7 +30,7 @@ const ShippingForm = ({ setShippingForm }: { setShippingForm: (data: ShippingFor
         <label htmlFor="name" className="text-xs text-gray-500 font-medium">
           Name
         </label>
-        <input className="border-b border-gray-200 py-2 outline-none text-sm" type="text" id="name" placeholder="John Doe" {...register("name")} />
+        <input className="border-b border-gray-200 py-2 outline-none text-sm" type="text" id="name" placeholder="John Doe" {...register("name")} value="Andry Ariadi" />
         {errors.name && <p className="text-xs text-red-500">{errors.name.message}</p>}
       </div>
 
@@ -39,7 +39,7 @@ const ShippingForm = ({ setShippingForm }: { setShippingForm: (data: ShippingFor
         <label htmlFor="email" className="text-xs text-gray-500 font-medium">
           Email
         </label>
-        <input className="border-b border-gray-200 py-2 outline-none text-sm" type="email" id="email" placeholder="johndoe@gmail.com" {...register("email")} />
+        <input className="border-b border-gray-200 py-2 outline-none text-sm" type="email" id="email" placeholder="johndoe@gmail.com" {...register("email")} value="andryariadi23@gmail.com" />
         {errors.email && <p className="text-xs text-red-500">{errors.email.message}</p>}
       </div>
 
@@ -48,7 +48,7 @@ const ShippingForm = ({ setShippingForm }: { setShippingForm: (data: ShippingFor
         <label htmlFor="phone" className="text-xs text-gray-500 font-medium">
           Phone
         </label>
-        <input className="border-b border-gray-200 py-2 outline-none text-sm" type="text" id="phone" placeholder="123456789" {...register("phone")} />
+        <input className="border-b border-gray-200 py-2 outline-none text-sm" type="text" id="phone" placeholder="123456789" {...register("phone")} value="082215458337" />
         {errors.phone && <p className="text-xs text-red-500">{errors.phone.message}</p>}
       </div>
 
@@ -57,7 +57,7 @@ const ShippingForm = ({ setShippingForm }: { setShippingForm: (data: ShippingFor
         <label htmlFor="address" className="text-xs text-gray-500 font-medium">
           Address
         </label>
-        <input className="border-b border-gray-200 py-2 outline-none text-sm" type="text" id="address" placeholder="123 Main St, Anytown" {...register("address")} />
+        <input className="border-b border-gray-200 py-2 outline-none text-sm" type="text" id="address" placeholder="123 Main St, Anytown" {...register("address")} value="Jl. H. Hasanudin" />
         {errors.address && <p className="text-xs text-red-500">{errors.address.message}</p>}
       </div>
 
@@ -66,7 +66,7 @@ const ShippingForm = ({ setShippingForm }: { setShippingForm: (data: ShippingFor
         <label htmlFor="city" className="text-xs text-gray-500 font-medium">
           City
         </label>
-        <input className="border-b border-gray-200 py-2 outline-none text-sm" type="text" id="city" placeholder="New York" {...register("city")} />
+        <input className="border-b border-gray-200 py-2 outline-none text-sm" type="text" id="city" placeholder="New York" {...register("city")} value="Balikpapan" />
         {errors.city && <p className="text-xs text-red-500">{errors.city.message}</p>}
       </div>
 

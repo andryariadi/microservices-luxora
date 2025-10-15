@@ -2,13 +2,14 @@
 
 import { stepsMenu } from "@/libs/constant";
 import useCartStore from "@/libs/stores/cartStore";
-import { ArrowRight, Trash2 } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import ShippingForm from "./ShippingForm";
 import PaymentForm from "./PaymentForm";
 import CartProductList from "./CartProductList";
 import { useState } from "react";
 import { ShippingFormInputs } from "@repo/types";
+import StripePaymentForm from "./StripePaymentForm";
 
 const StepsCart = () => {
   const searchParams = useSearchParams();
@@ -52,7 +53,8 @@ const StepsCart = () => {
           ) : activeStep === 2 ? (
             <ShippingForm setShippingForm={setShippingForm} />
           ) : activeStep === 3 ? (
-            <PaymentForm />
+            // <PaymentForm />
+            <StripePaymentForm shippingForm={shippingForm} />
           ) : (
             <p className="text-sm text-gray-500">Please fill in the shipping form to continue.</p>
           )}
