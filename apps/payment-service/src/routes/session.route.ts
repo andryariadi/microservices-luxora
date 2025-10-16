@@ -50,4 +50,24 @@ sessionRoute.post("/create-checkout-session", authUserMiddleware, async (c) => {
   }
 });
 
+sessionRoute.get("/:session_id", async (c) => {
+  try {
+    const { session_id } = c.req.param();
+
+    const session = await stripe.checkout.sessions.retrieve(session_id, {
+      expand: ["line_items"],
+    });
+
+    console.log({ session }, "<---sessionRoute4");
+
+    return c.json({
+      status: session.status,
+      paymentStatus: session.payment_status,
+    });
+  } catch (error) {
+    console.log(error);
+    return c.json({ error }, 500);
+  }
+});
+
 export default sessionRoute;

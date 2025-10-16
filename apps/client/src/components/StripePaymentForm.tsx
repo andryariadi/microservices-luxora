@@ -12,7 +12,7 @@ const stripe = loadStripe("pk_test_51SHeEyKDN0zX8soh3UCSynEOM46BVhoG3mtiGL4FVILe
 
 const fetchClientSecret = async (cart: CartItemType[], token: string) => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_PAYMENT_SERVICE_URL}/session/create-checkout-session`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_PAYMENT_SERVICE_URL}/sessions/create-checkout-session`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -28,6 +28,10 @@ const fetchClientSecret = async (cart: CartItemType[], token: string) => {
     const data = await res.json();
 
     console.log({ data }, "<--fetchClientSecret");
+
+    //  id:'cs_test_a1eaqDErLHs8Qc4CKjfR5y0lVSwu4Wi94mVseY7l4OObFtXEFKjUFBBMCi',
+    //      client_reference_id: 'user_33Wvbfv84AO59G9dW6MvOfbiuZu',
+    // client_secret:'cs_test_a1eaqDErLHs8Qc4CKjfR5y0lVSwu4Wi94mVseY7l4OObFtXEFKjUFBBMCi_secret_fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdwbEhqYWAnPydmcHZxamgneCUl',
 
     return data.checkoutSessionClientSecret;
   } catch (error) {

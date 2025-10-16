@@ -5,6 +5,7 @@ import { authUserMiddleware } from "./middleware/authMiddleware";
 import stripe from "./utils/stripe";
 import sessionRoute from "./routes/session.route";
 import { cors } from "hono/cors";
+import webhookRoute from "./routes/webhook.route";
 
 const app = new Hono();
 
@@ -42,7 +43,8 @@ app.get("/stripe-product-price", async (c) => {
   return c.json(res);
 });
 
-app.route("/session", sessionRoute);
+app.route("/sessions", sessionRoute);
+app.route("/webhooks", webhookRoute);
 
 const start = async () => {
   try {
