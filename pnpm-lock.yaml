@@ -323,6 +323,19 @@ importers:
         specifier: ^8.40.0
         version: 8.45.0(eslint@9.36.0(jiti@2.6.1))(typescript@5.9.2)
 
+  packages/kafka:
+    dependencies:
+      kafkajs:
+        specifier: ^2.2.4
+        version: 2.2.4
+    devDependencies:
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      '@types/node':
+        specifier: ^24.7.2
+        version: 24.7.2
+
   packages/order-db:
     dependencies:
       install:
@@ -2541,6 +2554,10 @@ packages:
     resolution: {integrity: sha512-ZZow9HBI5O6EPgSJLUb8n2NKgmVWTwCvHGwFuJlMjvLFqlGG6pjirPhtdsseaLZjSibD8eegzmYpUZwoIlj2cQ==}
     engines: {node: '>=4.0'}
 
+  kafkajs@2.2.4:
+    resolution: {integrity: sha512-j/YeapB1vfPT2iOIUn/vxdyKEuhuY2PxMBvf5JWux6iSaukAccrMtXEY/Lb7OvavDhOWME589bpLrEdnVHjfjA==}
+    engines: {node: '>=14.0.0'}
+
   kareem@2.6.3:
     resolution: {integrity: sha512-C3iHfuGUXK2u8/ipq9LfjFfXFxAZMQJJq7vLS45r3D9Y2xQ/m4S8zaR4zMLFWh9AsNPXmcFfUDhTEO8UIC/V6Q==}
     engines: {node: '>=12.0.0'}
@@ -4558,15 +4575,15 @@ snapshots:
   '@types/body-parser@1.19.6':
     dependencies:
       '@types/connect': 3.4.38
-      '@types/node': 24.7.1
+      '@types/node': 24.7.2
 
   '@types/connect@3.4.38':
     dependencies:
-      '@types/node': 24.7.1
+      '@types/node': 24.7.2
 
   '@types/cors@2.8.19':
     dependencies:
-      '@types/node': 24.7.1
+      '@types/node': 24.7.2
 
   '@types/d3-array@3.2.2': {}
 
@@ -4596,7 +4613,7 @@ snapshots:
 
   '@types/express-serve-static-core@5.0.7':
     dependencies:
-      '@types/node': 24.7.1
+      '@types/node': 24.7.2
       '@types/qs': 6.14.0
       '@types/range-parser': 1.2.7
       '@types/send': 0.17.5
@@ -4644,12 +4661,12 @@ snapshots:
   '@types/send@0.17.5':
     dependencies:
       '@types/mime': 1.3.5
-      '@types/node': 24.7.1
+      '@types/node': 24.7.2
 
   '@types/serve-static@1.15.8':
     dependencies:
       '@types/http-errors': 2.0.5
-      '@types/node': 24.7.1
+      '@types/node': 24.7.2
       '@types/send': 0.17.5
 
   '@types/webidl-conversions@7.0.3': {}
@@ -5820,6 +5837,8 @@ snapshots:
       array.prototype.flat: 1.3.3
       object.assign: 4.1.7
       object.values: 1.2.1
+
+  kafkajs@2.2.4: {}
 
   kareem@2.6.3: {}
 
