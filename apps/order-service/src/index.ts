@@ -3,6 +3,7 @@ import Fastify from "fastify";
 import { authUserMiddleware } from "./middleware/authMiddleware";
 import { orderRoute } from "./routes/order";
 import { connectOrderDB } from "@repo/order-db";
+import { consumer, producer } from "./utils/kafka";
 
 const fastify = Fastify();
 
@@ -22,7 +23,8 @@ fastify.register(orderRoute);
 
 const start = async () => {
   try {
-    await connectOrderDB();
+    Promise.all([await connectOrderDB(), await producer.connect(), await consumer.connect()]);
+
     await fastify.listen({ port });
     console.log(`Order service is running on port ${port}`);
   } catch (err) {
@@ -31,4 +33,5 @@ const start = async () => {
     process.exit(1);
   }
 };
+
 start();

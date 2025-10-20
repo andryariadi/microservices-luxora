@@ -1,9 +1,10 @@
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import cors from "cors";
 import { clerkMiddleware } from "@clerk/express";
 import productRouter from "./routes/product.route.js";
 import categoryRouter from "./routes/category.route.js";
 import { authUserMiddleware } from "./middleware/authMiddleware.js";
+import { consumer, producer } from "./utils/kafka.js";
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -27,12 +28,23 @@ app.get("/clerk", authUserMiddleware, async (req: Request, res: Response) => {
 app.use("/products", productRouter);
 app.use("/categories", categoryRouter);
 
-app.use((err: any, req: Request, res: Response, next: Function) => {
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   console.log(err, "<---errorInServer");
 
   return res.status(err.status || 500).json({ message: err.message || "Internal Server Error!" });
 });
 
-app.listen(PORT, () => {
-  console.log(`Product service is running on port ${PORT}`);
-});
+const start = async () => {
+  try {
+    Promise.all([await producer.connect(), await consumer.connect()]);
+
+    app.listen(PORT, () => {
+      console.log(`Product service is running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.log("Product service failed to start:", error);
+    process.exit(1);
+  }
+};
+
+start();
