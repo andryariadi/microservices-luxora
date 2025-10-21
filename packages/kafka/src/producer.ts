@@ -18,7 +18,7 @@ export const createProducer = (kafka: Kafka) => {
     await producer.disconnect();
   };
 
-  console.log({ connect, send, disconnect }, "<--producerKafka");
+  // console.log({ connect, send, disconnect }, "<--producerKafka");
 
   return { connect, send, disconnect };
 };

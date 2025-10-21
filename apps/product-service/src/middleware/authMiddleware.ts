@@ -31,7 +31,7 @@ export const authAdminMiddleware = async (req: Request, res: Response, next: Nex
 
   const claims = auth.sessionClaims as CustomJwtSessionClaims;
 
-  console.log({ claims }, "<---authMiddlewareExpress");
+  console.log({ claims, auth: auth.userId }, "<---authMiddlewareExpress");
 
   if (claims.metadata?.role !== "admin") {
     return res.status(403).json({ message: "Unauthorized, you are not an admin!" });

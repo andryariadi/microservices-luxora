@@ -27,7 +27,7 @@ const fetchClientSecret = async (cart: CartItemType[], token: string) => {
 
     const data = await res.json();
 
-    console.log({ data }, "<--fetchClientSecret");
+    // console.log({ data }, "<--fetchClientSecret");
 
     return data.checkoutSessionClientSecret;
   } catch (error) {
@@ -51,7 +51,7 @@ const StripePaymentForm = ({ shippingForm }: { shippingForm: ShippingFormInputs 
 
         const secret = await fetchClientSecret(cart, token);
 
-        console.log({ secret }, "<--stripePaymentForm");
+        // console.log({ secret }, "<--stripePaymentForm");
 
         setClientSecret(secret);
       } catch (error) {

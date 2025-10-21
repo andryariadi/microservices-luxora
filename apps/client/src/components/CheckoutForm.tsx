@@ -44,7 +44,7 @@ const CheckoutForm = ({ shippingForm }: { shippingForm: ShippingFormInputs }) =>
       // Confirm payment:
       const res = await checkout.checkout.confirm();
 
-      console.log({ res }, "<--handleCheckoutForm");
+      // console.log({ res }, "<--handleCheckoutForm");
 
       if (res.type === "error") {
         setError(res.error);

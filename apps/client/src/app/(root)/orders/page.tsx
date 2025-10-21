@@ -9,7 +9,7 @@ const OrdersPage = async () => {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-    // cache: "no-store",
+    cache: "no-store",
   });
 
   const products = await data.json();

@@ -19,7 +19,7 @@ export const createConsumer = (kafka: Kafka, groupId: string) => {
       fromBeginning: true,
     });
 
-    console.log({ res }, "<--costumerKafka1");
+    // console.log({ res }, "<--costumerKafka1");
 
     const res2 = await consumer.run({
       eachMessage: async ({ topic, partition, message }) => {
@@ -39,14 +39,14 @@ export const createConsumer = (kafka: Kafka, groupId: string) => {
       },
     });
 
-    console.log({ res }, "<--costumerKafka2");
+    // console.log({ res }, "<--costumerKafka2");
   };
 
   const disconnect = async () => {
     await consumer.disconnect();
   };
 
-  console.log({ connect, subscribe, disconnect }, "<--consumerKafka3");
+  // console.log({ connect, subscribe, disconnect }, "<--consumerKafka3");
 
   return { connect, subscribe, disconnect };
 };

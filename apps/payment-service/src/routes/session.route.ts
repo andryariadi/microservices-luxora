@@ -10,13 +10,13 @@ sessionRoute.post("/create-checkout-session", authUserMiddleware, async (c) => {
   const { cart }: { cart: CartItemType[] } = await c.req.json();
   const userId = c.get("userId");
 
-  console.log({ cart }, "<---sessionRoute1");
+  // console.log({ cart }, "<---sessionRoute1");
 
   const lineItems = await Promise.all(
     cart.map(async (item) => {
       const unitAmount = await getStripeProductPrice(item.id);
 
-      console.log({ unitAmount }, "<---sessionRoute2");
+      // console.log({ unitAmount }, "<---sessionRoute2");
 
       return {
         price_data: {
@@ -41,7 +41,7 @@ sessionRoute.post("/create-checkout-session", authUserMiddleware, async (c) => {
       return_url: "http://localhost:3002/return?session_id={CHECKOUT_SESSION_ID}",
     });
 
-    console.log({ session }, "<---sessionRoute3");
+    // console.log({ session }, "<---sessionRoute3");
 
     return c.json({ checkoutSessionClientSecret: session.client_secret });
   } catch (error) {
