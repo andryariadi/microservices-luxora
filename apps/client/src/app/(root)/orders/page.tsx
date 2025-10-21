@@ -5,7 +5,7 @@ const OrdersPage = async () => {
   const { getToken } = await auth();
   const token = await getToken();
 
-  const data = await fetch("http://localhost:8002/clerk", {
+  const data = await fetch("http://localhost:8000/clerk", {
     headers: {
       Authorization: `Bearer ${token}`,
     },

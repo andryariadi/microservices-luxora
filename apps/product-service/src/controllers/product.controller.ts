@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 import { prisma, Prisma } from "@repo/product-db";
+import { StripeProductType } from "@repo/types";
+import { producer } from "../utils/kafka";
 
 class Controller {
   static async getProducts(req: Request, res: Response) {
@@ -194,6 +196,14 @@ class Controller {
       },
     });
 
+    const stripeProduct: StripeProductType = {
+      id: product.id,
+      name: product.name,
+      price: product.basePrice,
+    };
+
+    producer.send("product.created", { value: stripeProduct });
+
     res.status(201).json({
       message: "Product created successfully!",
       data: product,
@@ -337,6 +347,8 @@ class Controller {
     const product = await prisma.product.delete({
       where: { id },
     });
+
+    producer.send("product.deleted", { value: id });
 
     res.status(200).json({
       message: "Product deleted successfully!",
