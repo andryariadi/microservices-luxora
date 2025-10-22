@@ -27,7 +27,7 @@ const fetchClientSecret = async (cart: CartItemType[], token: string) => {
 
     const data = await res.json();
 
-    // console.log({ data }, "<--fetchClientSecret");
+    console.log({ data }, "<--fetchClientSecret");
 
     return data.checkoutSessionClientSecret;
   } catch (error) {

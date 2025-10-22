@@ -31,8 +31,12 @@ class Controller {
 
     const where: Prisma.ProductWhereInput = {};
 
-    if (category) {
+    if (category && category !== "all") {
       where.category = { slug: category as string };
+    }
+
+    if (category === "all") {
+      delete where.category;
     }
 
     if (search) {

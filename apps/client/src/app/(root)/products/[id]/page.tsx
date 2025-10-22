@@ -1,12 +1,13 @@
 import ProductInteraction from "@/components/ProductInteraction";
-import { cardPayment, products } from "@/libs/constant";
+import { getProduct } from "@/libs/actions/product.action";
+import { cardPayment } from "@/libs/constant";
 import Image from "next/image";
 
 const ProductDetailPage = async ({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ color: string; size: string }> }) => {
   const { id } = await params;
   const { color, size } = await searchParams;
 
-  const product = products.find((product) => product.id === id);
+  const product = await getProduct(id);
 
   if (!product) return <div className="min-h-[calc(100vh-64px)] flex items-center justify-center">Product not found</div>;
 
