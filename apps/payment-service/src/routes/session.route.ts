@@ -58,7 +58,7 @@ sessionRoute.get("/:session_id", async (c) => {
       expand: ["line_items"],
     });
 
-    console.log({ session }, "<---sessionRoute4");
+    // console.log({ session }, "<---sessionRoute4");
 
     return c.json({
       status: session.status,

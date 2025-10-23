@@ -9,7 +9,7 @@ const useCartStore = create<CartStoreStateType & CartStoreActionsType>()(
       cart: [],
       hasHydrated: false,
       addToCart: (product) => {
-        console.log({ product }, "<---addToCart");
+        console.log({ product }, "<---addToCartStore");
 
         const quantity = product.quantity || 1;
 
@@ -17,7 +17,7 @@ const useCartStore = create<CartStoreStateType & CartStoreActionsType>()(
           // 1. Cari variant yang sesuai di data produk:
           const selectedVariant = product.variants?.find((v) => v.size === product.selectedSize && v.color === product.selectedColor);
 
-          console.log({ selectedVariant }, "<---addToCart2");
+          console.log({ selectedVariant }, "<---addToCartStore2");
 
           // 2. Validasi stok:
           if (selectedVariant?.stock === 0) {

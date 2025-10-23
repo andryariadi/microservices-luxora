@@ -5,7 +5,7 @@ import { ChevronDown, ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { ProductType } from "@repo/types";
+import { CartItemType, ProductType } from "@repo/types";
 
 const ProductCard = ({ product }: { product: ProductType }) => {
   const [productTypes, setProductTypes] = useState({
@@ -22,17 +22,18 @@ const ProductCard = ({ product }: { product: ProductType }) => {
     }));
   };
 
-  // const handleToCart = () => {
-  //   addToCart({
-  //     ...product,
-  //     variantId: `${product.id}-${productTypes.size}-${productTypes.color}`,
-  //     quantity: 1,
-  //     selectedSize: productTypes.size,
-  //     selectedColor: productTypes.color,
-  //   });
-  // };
+  const handleAddToCart = () => {
+    const cartItem: CartItemType = {
+      ...product,
+      variantId: `${product.id}-${productTypes.size}-${productTypes.color}`,
+      quantity: 1,
+      selectedColor: productTypes.color,
+      selectedSize: productTypes.size,
+    } as CartItemType;
 
-  // console.log({ cart }, "<---card");
+    addToCart(cartItem);
+  };
+  // console.log({ productTypes, cart }, "<---card");
 
   return (
     <article className="bg-white shadow-sm rounded-lg overflow-hidden">
@@ -97,7 +98,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
           <p className="font-medium">${product.basePrice.toFixed(2)}</p>
 
           {/* Cart */}
-          <button className="group p-2 rounded-md border-1 border-gray-200 shadow-lg text-sm hover:text-white hover:bg-black transition-all duration-300 flex items-center gap-2">
+          <button onClick={handleAddToCart} className="group p-2 rounded-md border-1 border-gray-200 shadow-lg text-sm hover:text-white hover:bg-black transition-all duration-300 flex items-center gap-2">
             <ShoppingCart className="w-4 h-4" />
             <span className="hidden text-xs group-hover:block transition-all duration-500">Add to Cart</span>
           </button>

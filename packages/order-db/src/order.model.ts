@@ -17,6 +17,10 @@ const OrderSchema = new Schema(
       type: Number,
       required: true,
     },
+    shipping: {
+      type: String,
+      required: true,
+    },
     status: {
       type: String,
       required: true,

@@ -34,15 +34,18 @@ webhookRoute.post("/stripe", async (c) => {
     case "checkout.session.completed":
       const session = event.data.object as Stripe.Checkout.Session;
 
-      console.log({ session }, "<--webhookRoute2");
-
       const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
+
+      console.log({ session, address: session.collected_information?.shipping_details?.address, lineItems: lineItems.data }, "<--webhookRoute2");
+
+      const shippingAddress = `${session.collected_information?.shipping_details?.address.line1}, ${session.collected_information?.shipping_details?.address.city}`;
 
       producer.send("payment.successful", {
         value: {
           userId: session.client_reference_id,
           email: session.customer_details?.email,
           amount: session.amount_total,
+          shipping: shippingAddress,
           status: session.payment_status === "paid" ? "success" : "failed",
           products: lineItems.data.map((item) => ({
             name: item.description,

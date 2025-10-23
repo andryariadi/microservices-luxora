@@ -36,6 +36,7 @@ const CheckoutForm = ({ shippingForm }: { shippingForm: ShippingFormInputs }) =>
         name: "shipping_address",
         address: {
           line1: shippingForm.address,
+          line2: shippingForm.name,
           city: shippingForm.city,
           country: "US",
         },
@@ -44,7 +45,7 @@ const CheckoutForm = ({ shippingForm }: { shippingForm: ShippingFormInputs }) =>
       // Confirm payment:
       const res = await checkout.checkout.confirm();
 
-      // console.log({ res }, "<--handleCheckoutForm");
+      console.log({ res }, "<--handleCheckoutForm");
 
       if (res.type === "error") {
         setError(res.error);
