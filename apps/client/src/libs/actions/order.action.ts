@@ -5,6 +5,10 @@ export const getOrders = async () => {
     const { getToken } = await auth();
     const token = await getToken();
 
+    if (!token) {
+      throw new Error("User is not authenticated");
+    }
+
     const res = await fetch(`${process.env.NEXT_PUBLIC_ORDER_SERVICE_URL}/user-orders`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -14,7 +18,7 @@ export const getOrders = async () => {
 
     const data = await res.json();
 
-    console.log(data, "<---getOrdersAction");
+    console.log({ data, token }, "<---getOrdersAction");
 
     return data;
   } catch (error) {

@@ -2,6 +2,7 @@ import Nabvar from "@/components/Nabvar";
 import ASidebar from "@/components/Sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { cookies } from "next/headers";
+import { ClerkProvider } from "@clerk/nextjs";
 
 export default async function AppLayout({
   children,
@@ -12,6 +13,7 @@ export default async function AppLayout({
   const defaultOpen = cookieStore.get("sidebar_state")?.value === "true";
 
   return (
+    // <ClerkProvider>
     <SidebarProvider defaultOpen={defaultOpen}>
       <div className="b-amber-500 w-full flex">
         <ASidebar />
@@ -22,5 +24,6 @@ export default async function AppLayout({
         </main>
       </div>
     </SidebarProvider>
+    // </ClerkProvider>
   );
 }

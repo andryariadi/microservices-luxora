@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Archivo, Roboto, Sora, Urbanist } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const archivo = Archivo({
   subsets: ["latin"],
@@ -44,12 +45,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${archivo.variable} ${roboto.variable} ${sora.variable} ${urbanist.variable} font-archivo antialiased`}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          {children}
-        </ThemeProvider>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body className={`${archivo.variable} ${roboto.variable} ${sora.variable} ${urbanist.variable} font-archivo antialiased`}>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+            {children}
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

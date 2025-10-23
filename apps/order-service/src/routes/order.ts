@@ -6,7 +6,7 @@ export const orderRoute = async (fastify: FastifyInstance) => {
   fastify.get("/user-orders", { preHandler: authUserMiddleware }, async (request, reply) => {
     const { userId } = request;
 
-    const orders = await Order.find({ userId });
+    const orders = await Order.find({ userId }).sort({ createdAt: -1 });
 
     reply.code(200).send({ orders });
   });
