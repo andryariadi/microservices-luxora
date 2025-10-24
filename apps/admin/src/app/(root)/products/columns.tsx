@@ -3,13 +3,13 @@
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Product } from "@/lib/types";
+import { ProductType } from "@repo/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-export const columns: ColumnDef<Product>[] = [
+export const columns: ColumnDef<ProductType>[] = [
   {
     id: "select",
     header: ({ table }) => <Checkbox onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)} checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && "indeterminate")} />,
@@ -22,7 +22,7 @@ export const columns: ColumnDef<Product>[] = [
       const product = row.original;
       return (
         <div className="w-9 h-9 relative">
-          <Image src={product.images[product.colors[0]]} alt={product.name} fill className="rounded-full object-cover" />
+          <Image src={product.availableImages?.[product.availableColors?.[0] ?? ""] || ""} alt={product.name} fill className="rounded-full object-cover" />
         </div>
       );
     },
@@ -32,7 +32,7 @@ export const columns: ColumnDef<Product>[] = [
     header: "Name",
   },
   {
-    accessorKey: "price",
+    accessorKey: "basePrice",
     header: ({ column }) => {
       return (
         <div className="flex items-center justify-center">
@@ -45,7 +45,7 @@ export const columns: ColumnDef<Product>[] = [
     },
     cell: ({ row }) => {
       const product = row.original;
-      return <div className="text-center">${product.price}</div>;
+      return <div className="text-center">${product.basePrice}</div>;
     },
     size: 200,
   },
