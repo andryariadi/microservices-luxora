@@ -25,3 +25,29 @@ export const getOrders = async () => {
     console.log("Failed fetch orders:", error);
   }
 };
+
+export const getAllOrders = async (limit: number) => {
+  try {
+    const { getToken } = await auth();
+    const token = await getToken();
+
+    if (!token) {
+      throw new Error("User is not authenticated");
+    }
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_ORDER_SERVICE_URL}/orders?limit=${limit}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      cache: "no-store",
+    });
+
+    const data = await res.json();
+
+    console.log({ data, token }, "<---getAllOrdersAction");
+
+    return data;
+  } catch (error) {
+    console.log("Failed fetch all orders:", error);
+  }
+};

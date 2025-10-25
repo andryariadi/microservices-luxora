@@ -4,8 +4,9 @@ import TodoList from "@/components/TodoList";
 // import TotalRevenueBarChart from "@/components/TotalRevenueBarChart";
 import { TotalRevenueWrapper } from "@/components/TotalRevenueWrapper";
 import TotalVisitorAreaChart from "@/components/TotalVisitorAreaChart";
+import { getAllOrders } from "@/lib/actions/order.action";
 import { getOrdersChart } from "@/lib/actions/order.chart.action";
-import { getLatestTransactions, getPopularProducts } from "@/lib/constants";
+import { getPopularProducts } from "@/lib/constants";
 import { LoaderPinwheel } from "lucide-react";
 import dynamic from "next/dynamic";
 // import { Suspense } from "react";
@@ -19,11 +20,11 @@ const CardListDynamic = dynamic(() => import("@/components/CardList"), {
 });
 
 export default async function HomePage() {
-  const transactions = await getLatestTransactions();
-  const popularProducts = await getPopularProducts();
   const ordersChart = await getOrdersChart();
+  const { orders: lateTransactions } = await getAllOrders(5);
+  const popularProducts = await getPopularProducts();
 
-  console.log({ ordersChart }, "<--homePage");
+  console.log({ ordersChart, lateTransactions }, "<--homePage");
 
   return (
     <div
@@ -50,7 +51,7 @@ export default async function HomePage() {
         </Suspense> */}
 
         {/* Streaming server component with next/dynamic */}
-        <CardListDynamic title="Lates Transactions" transactions={transactions} />
+        <CardListDynamic title="Lates Transactions" lateTransactions={lateTransactions} />
       </div>
 
       <div className="bg-primary-foreground shadow-sm dark:shadow-none p-4 rounded-lg border border-sidebar-border">
