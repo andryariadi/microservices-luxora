@@ -2,6 +2,7 @@
 
 import { ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@/components/ui/chart";
 import { barChartData } from "@/lib/constants";
+import { OrderChartType } from "@repo/types";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
 const chartConfig = {
@@ -15,14 +16,14 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-const TotalRevenueBarChart = () => {
+const TotalRevenueBarChart = ({ data }: { data: OrderChartType[] }) => {
   return (
     <section className="space-y-5">
       <h1 className="text-lg font-medium">Total Revenue</h1>
 
       {/* Chart */}
       <ChartContainer config={chartConfig} className="min-h-[420px] w-full">
-        <BarChart accessibilityLayer data={barChartData}>
+        <BarChart accessibilityLayer data={data}>
           <CartesianGrid vertical={false} />
 
           <XAxis dataKey="month" tickLine={false} tickMargin={10} axisLine={false} tickFormatter={(value) => value.slice(0, 3)} />

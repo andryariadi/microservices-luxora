@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 // import { Skeleton } from "./ui/skeleton";
 import { LoaderPinwheel } from "lucide-react";
+import { OrderChartType } from "@repo/types";
 
 const TotalRevenueChart = dynamic(() => import("@/components/TotalRevenueBarChart"), {
   ssr: false,
@@ -13,6 +14,6 @@ const TotalRevenueChart = dynamic(() => import("@/components/TotalRevenueBarChar
   ),
 });
 
-export function TotalRevenueWrapper() {
-  return <TotalRevenueChart />;
+export function TotalRevenueWrapper({ data }: { data: OrderChartType[] }) {
+  return <TotalRevenueChart data={data} />;
 }

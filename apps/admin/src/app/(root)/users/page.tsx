@@ -7,8 +7,6 @@ const UsersPage = async () => {
   const res = await getUsers();
   const users: User[] = res?.data || [];
 
-  console.log({ users }, "<--userPage");
-
   return (
     <div className="b-sky-500 page pb-20">
       {/* Header */}

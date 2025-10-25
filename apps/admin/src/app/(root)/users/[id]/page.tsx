@@ -15,7 +15,6 @@ const UserProfilePage = async ({ params }: { params: Promise<{ id: string }> }) 
 
   const user: User = await getUser(id);
 
-
   return (
     <div className="page">
       {/* Breadcrumb */}
@@ -92,7 +91,7 @@ const UserProfilePage = async ({ params }: { params: Promise<{ id: string }> }) 
             <div className="flex items-center gap-2">
               <Avatar className="size-12">
                 <AvatarImage src={user.imageUrl} />
-                <AvatarFallback>JD</AvatarFallback>
+                <AvatarFallback>{user?.firstName?.charAt(0) || user?.username?.charAt(0) || "-"}</AvatarFallback>
               </Avatar>
               <h1 className="text-xl font-semibold">{`${user.firstName} ${user.lastName}`}</h1>
             </div>

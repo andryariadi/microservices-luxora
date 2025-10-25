@@ -18,13 +18,12 @@ export const getUsers = async () => {
 
     const data = await res.json();
 
-    console.log({ data, token }, "<---getUsersAction");
-
     return data;
   } catch (error) {
     console.log("Failed fetch users:", error);
   }
 };
+
 export const getUser = async (id: string) => {
   try {
     const { getToken } = await auth();
@@ -42,8 +41,6 @@ export const getUser = async (id: string) => {
     });
 
     const data = await res.json();
-
-    console.log({ data, token }, "<---getUserAction");
 
     return data;
   } catch (error) {

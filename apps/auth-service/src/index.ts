@@ -37,10 +37,10 @@ const start = async () => {
     await producer.connect();
 
     app.listen(PORT, () => {
-      console.log(`Product service is running on port ${PORT}`);
+      console.log(`Auth service is running on port ${PORT}`);
     });
   } catch (error) {
-    console.log("Product service failed to start:", error);
+    console.log("Auth service failed to start:", error);
     process.exit(1);
   }
 };

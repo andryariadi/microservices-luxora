@@ -4,6 +4,7 @@ import TodoList from "@/components/TodoList";
 // import TotalRevenueBarChart from "@/components/TotalRevenueBarChart";
 import { TotalRevenueWrapper } from "@/components/TotalRevenueWrapper";
 import TotalVisitorAreaChart from "@/components/TotalVisitorAreaChart";
+import { getOrdersChart } from "@/lib/actions/order.chart.action";
 import { getLatestTransactions, getPopularProducts } from "@/lib/constants";
 import { LoaderPinwheel } from "lucide-react";
 import dynamic from "next/dynamic";
@@ -20,6 +21,9 @@ const CardListDynamic = dynamic(() => import("@/components/CardList"), {
 export default async function HomePage() {
   const transactions = await getLatestTransactions();
   const popularProducts = await getPopularProducts();
+  const ordersChart = await getOrdersChart();
+
+  console.log({ ordersChart }, "<--homePage");
 
   return (
     <div
@@ -30,7 +34,7 @@ export default async function HomePage() {
         {/* <TotalRevenueBarChart /> */}
 
         {/* Streaming client component with next/dymanic */}
-        <TotalRevenueWrapper />
+        <TotalRevenueWrapper data={ordersChart} />
       </div>
 
       <div className="bg-primary-foreground shadow-sm dark:shadow-none p-4 rounded-lg border border-sidebar-border">
