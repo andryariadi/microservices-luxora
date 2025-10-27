@@ -53,9 +53,11 @@ export type StripeProductType = {
   price: number;
 };
 
-export const CategoryFormSchema = z.object({
+export const CategoryFormSchemaValidation = z.object({
   name: z.string({ message: "Name is Required!" }).min(1, { message: "Name is Required!" }),
   slug: z.string({ message: "Slug is Required!" }).min(1, { message: "Slug is Required!" }),
 });
+
+export type CategoryFormSchema = z.infer<typeof CategoryFormSchemaValidation>;
 
 export type CategoryType = Category;

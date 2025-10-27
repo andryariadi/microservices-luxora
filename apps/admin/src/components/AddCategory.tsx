@@ -1,28 +1,45 @@
 "use client";
 
 import { SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { CategoryFormSchema } from "@/lib/types";
-import { categoryFormSchemaValidation } from "@/lib/validations";
 import { Loader } from "lucide-react";
+import { CategoryFormSchema, CategoryFormSchemaValidation } from "@repo/types";
+import { useMutation } from "@tanstack/react-query";
+import { createCategory } from "@/lib/actions/category.action";
+import { toast } from "react-toastify";
 
 const AddCategory = () => {
   const form = useForm<CategoryFormSchema>({
-    resolver: zodResolver(categoryFormSchemaValidation),
+    resolver: zodResolver(CategoryFormSchemaValidation),
     defaultValues: {
       name: "",
+      slug: "",
     },
   });
 
-  const handleSubmitCategory: SubmitHandler<CategoryFormSchema> = async (data) => {
-    console.log({ data }, "<----handleSubmitCategory");
-  };
+  // const handleSubmitCategory: SubmitHandler<CategoryFormSchema> = async (data) => {
+  //   console.log({ data }, "<----handleSubmitCategory");
+  // };
 
-  console.log("ariadi");
+  const handleSubmitCategory = useMutation({
+    mutationFn: async (data: CategoryFormSchema) => {
+      const res = await createCategory(data);
+
+      console.log({ data, res }, "<----handleSubmitCategory");
+    },
+    onSuccess: () => {
+      toast.success("Category created successfully");
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
+  console.log({ handleSubmitCategory }, "<--addCategoryForm");
 
   return (
     <SheetContent>
@@ -30,7 +47,7 @@ const AddCategory = () => {
         <SheetTitle className="mb-4">Add Category</SheetTitle>
         <SheetDescription asChild>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(handleSubmitCategory)} className="space-y-8">
+            <form onSubmit={form.handleSubmit((data) => handleSubmitCategory.mutate(data))} className="space-y-8">
               <FormField
                 control={form.control}
                 name="name"
@@ -41,6 +58,21 @@ const AddCategory = () => {
                       <Input {...field} />
                     </FormControl>
                     <FormDescription>Enter category name.</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="slug"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Slug</FormLabel>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                    <FormDescription>Enter category slug.</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}

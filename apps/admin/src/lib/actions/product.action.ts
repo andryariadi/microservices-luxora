@@ -1,6 +1,6 @@
-export const getProducts = async () => {
+export const getProducts = async ({ limit, popular }: { limit?: number; popular?: boolean }) => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_PRODUCT_SERVICE_URL}/products`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_PRODUCT_SERVICE_URL}/products?${limit ? `&limit=${limit}` : ""}${popular ? "&popular=true" : ""}`);
 
     if (!res.ok) {
       throw new Error("Network response was not ok");

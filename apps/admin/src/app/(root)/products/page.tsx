@@ -4,7 +4,7 @@ import { DataTable } from "./data-table";
 import { ProductType } from "@repo/types";
 
 const ProductsPage = async () => {
-  const res = await getProducts();
+  const res = await getProducts({});
 
   const products: ProductType[] = res.data || [];
 

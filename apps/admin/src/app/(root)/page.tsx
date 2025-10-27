@@ -6,7 +6,7 @@ import { TotalRevenueWrapper } from "@/components/TotalRevenueWrapper";
 import TotalVisitorAreaChart from "@/components/TotalVisitorAreaChart";
 import { getAllOrders } from "@/lib/actions/order.action";
 import { getOrdersChart } from "@/lib/actions/order.chart.action";
-import { getPopularProducts } from "@/lib/constants";
+import { getProducts } from "@/lib/actions/product.action";
 import { LoaderPinwheel } from "lucide-react";
 import dynamic from "next/dynamic";
 // import { Suspense } from "react";
@@ -22,9 +22,10 @@ const CardListDynamic = dynamic(() => import("@/components/CardList"), {
 export default async function HomePage() {
   const ordersChart = await getOrdersChart();
   const { orders: lateTransactions } = await getAllOrders(5);
-  const popularProducts = await getPopularProducts();
+  const { data: popularProducts } = await getProducts({ limit: 5, popular: true });
+  // const popularProducts = await getPopularProducts();
 
-  console.log({ ordersChart, lateTransactions }, "<--homePage");
+  // console.log({ ordersChart, lateTransactions, popularProducts }, "<--homePage");
 
   return (
     <div

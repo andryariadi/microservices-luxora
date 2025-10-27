@@ -1,11 +1,10 @@
 import { Card, CardContent, CardFooter, CardTitle } from "./ui/card";
 import Image from "next/image";
 import { Badge } from "./ui/badge";
-import { Product } from "@/lib/types";
-import { OrderType } from "@repo/types";
+import { OrderType, ProductType } from "@repo/types";
 import { ScrollArea } from "./ui/scroll-area";
 
-const CardList = ({ title, lateTransactions, popularProducts }: { title: string; lateTransactions?: OrderType[]; popularProducts?: Product[] }) => {
+const CardList = ({ title, lateTransactions, popularProducts }: { title: string; lateTransactions?: OrderType[]; popularProducts?: ProductType[] }) => {
   return (
     <section className="space-y-5">
       <h1 className="text-lg font-medium">{title}</h1>
@@ -17,14 +16,14 @@ const CardList = ({ title, lateTransactions, popularProducts }: { title: string;
           popularProducts?.map((item) => (
             <Card key={item.id} className="flex-row items-center justify-between gap-4 p-4">
               <div className="relative w-12 h-12 rounded-sm overflow-hidden">
-                <Image src={Object.values(item.images)[0] || ""} alt={item.name} fill className="object-cover" />
+                <Image src={Object.values(item.availableImages as Record<string, string>)[0] || ""} alt={item.name} fill className="object-cover" />
               </div>
 
               <CardContent className="flex-1 p-0">
                 <CardTitle className="text-sm font-medium">{item.name}</CardTitle>
               </CardContent>
 
-              <CardFooter className="p-0">${item.price}K</CardFooter>
+              <CardFooter className="p-0">${item.basePrice}K</CardFooter>
             </Card>
           ))
         ) : (

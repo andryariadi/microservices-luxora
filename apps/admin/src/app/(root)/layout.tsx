@@ -2,7 +2,7 @@ import Nabvar from "@/components/Nabvar";
 import ASidebar from "@/components/Sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { cookies } from "next/headers";
-import { ClerkProvider } from "@clerk/nextjs";
+import QueryProvider from "@/components/providers/QueryProvider";
 
 export default async function AppLayout({
   children,
@@ -13,17 +13,17 @@ export default async function AppLayout({
   const defaultOpen = cookieStore.get("sidebar_state")?.value === "true";
 
   return (
-    // <ClerkProvider>
-    <SidebarProvider defaultOpen={defaultOpen}>
-      <div className="b-amber-500 w-full flex">
-        <ASidebar />
+    <QueryProvider>
+      <SidebarProvider defaultOpen={defaultOpen}>
+        <div className="b-amber-500 w-full flex">
+          <ASidebar />
 
-        <main className="b-lime-600">
-          <Nabvar />
-          {children}
-        </main>
-      </div>
-    </SidebarProvider>
-    // </ClerkProvider>
+          <main className="b-lime-600">
+            <Nabvar />
+            {children}
+          </main>
+        </div>
+      </SidebarProvider>
+    </QueryProvider>
   );
 }

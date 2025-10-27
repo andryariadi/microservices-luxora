@@ -1,7 +1,7 @@
 "use client";
 
 import { ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@/components/ui/chart";
-import { barChartData } from "@/lib/constants";
+// import { barChartData } from "@/lib/constants";
 import { OrderChartType } from "@repo/types";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 

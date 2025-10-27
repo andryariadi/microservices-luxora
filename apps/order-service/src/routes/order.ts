@@ -14,7 +14,9 @@ export const orderRoute = async (fastify: FastifyInstance) => {
   });
 
   fastify.get("/orders", { preHandler: authAdminMiddleware }, async (request, reply) => {
-    const orders = await Order.find();
+    const { limit } = request.query as { limit: number };
+
+    const orders = await Order.find().limit(limit).sort({ createdAt: -1 });
 
     reply.code(200).send({ orders });
   });
