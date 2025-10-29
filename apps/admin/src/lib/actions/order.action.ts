@@ -44,7 +44,7 @@ export const getAllOrders = async (limit: number) => {
 
     const data = await res.json();
 
-    console.log({ data, token }, "<---getAllOrdersAction");
+    // console.log({ data, token }, "<---getAllOrdersAction");
 
     return data;
   } catch (error) {

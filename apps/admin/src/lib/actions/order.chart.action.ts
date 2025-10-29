@@ -17,7 +17,7 @@ export const getOrdersChart = async () => {
 
     const data = await res.json();
 
-    console.log({ data }, "<---orderschartaction");
+    // console.log({ data }, "<---orderschartaction");
 
     return data;
   } catch (error) {

@@ -33,6 +33,7 @@ const AddCategory = () => {
     },
     onSuccess: () => {
       toast.success("Category created successfully");
+      form.reset();
     },
     onError: (error) => {
       toast.error(error.message);
@@ -78,7 +79,9 @@ const AddCategory = () => {
                 )}
               />
 
-              <Button type="submit">{form.formState.isSubmitting ? <Loader scale={22} className="animate-spin mx-auto" /> : "Submit"}</Button>
+              <Button type="submit" disabled={handleSubmitCategory.isPending} className="disabled:opacity-50 disabled:cursor-not-allowed">
+                {handleSubmitCategory.isPending ? <Loader scale={22} className="animate-spin mx-auto" /> : "Submit"}
+              </Button>
             </form>
           </Form>
         </SheetDescription>

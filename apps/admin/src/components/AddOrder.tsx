@@ -24,8 +24,6 @@ const AddOrder = () => {
     console.log({ data }, "<----handleSubmitOrder");
   };
 
-  console.log("andry");
-
   return (
     <SheetContent>
       <SheetHeader>

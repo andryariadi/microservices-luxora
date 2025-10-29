@@ -6,6 +6,10 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { useState } from "react";
 import { Trash2 } from "lucide-react";
 import { DataTablePagination } from "@/components/TablePagination";
+import { useMutation } from "@tanstack/react-query";
+import { deleteUser } from "@/lib/actions/user.action";
+import { User } from "@clerk/nextjs/server";
+import { toast } from "react-toastify";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -30,14 +34,35 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
     },
   });
 
+  const mutation = useMutation({
+    mutationFn: async () => {
+      const selectedRows = table.getSelectedRowModel().rows;
+
+      Promise.all(
+        selectedRows.map(async (row) => {
+          const userId = (row.original as User).id;
+
+          await deleteUser(userId);
+        })
+      );
+    },
+    onSuccess: () => {
+      toast.success("User(s) deleted successfully");
+      router.refresh();
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
   return (
     <div className="rounded-md border">
       {/* Delete Button */}
       {Object.keys(rowSelection).length > 0 && (
         <div className="flex justify-end">
-          <button className="flex items-center gap-2 bg-red-500 text-white px-2 py-1 text-sm rounded-md m-4 cursor-pointer">
+          <button className="flex items-center gap-2 bg-red-500 text-white px-2 py-1 text-sm rounded-md m-4 cursor-pointer" onClick={() => mutation.mutate()} disabled={mutation.isPending}>
             <Trash2 className="w-4 h-4" />
-            Delete User(s)
+            {mutation.isPending ? "Deleting" : "Delete User(s)"}
           </button>
         </div>
       )}

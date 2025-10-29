@@ -33,7 +33,13 @@ router.post("/", async (req, res) => {
       email: user.emailAddresses[0]?.emailAddress,
     },
   });
-  res.status(200).json(user);
+
+  console.log({ newUser, user }, "<---userRoute");
+
+  res.status(200).json({
+    message: "User created successfully!",
+    data: user,
+  });
 });
 
 router.delete("/:id", async (req, res) => {
@@ -41,7 +47,10 @@ router.delete("/:id", async (req, res) => {
 
   const user = await clerkClient.users.deleteUser(id);
 
-  res.status(200).json(user);
+  res.status(200).json({
+    message: "User deleted successfully!",
+    data: user,
+  });
 });
 
 export default router;
