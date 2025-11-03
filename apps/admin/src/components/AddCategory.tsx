@@ -40,8 +40,6 @@ const AddCategory = () => {
     },
   });
 
-  console.log({ handleSubmitCategory }, "<--addCategoryForm");
-
   return (
     <SheetContent>
       <SheetHeader>

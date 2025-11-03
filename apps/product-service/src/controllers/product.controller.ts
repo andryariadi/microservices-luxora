@@ -111,6 +111,8 @@ class Controller {
   static async createProduct(req: Request, res: Response) {
     const { name, shortDescription, description, basePrice, availableSizes, availableColors, availableImages, categorySlug, variants } = req.body;
 
+    console.log({ data: req.body }, "<----productController");
+
     // Validate required fields:
     if (!name || !categorySlug) {
       return res.status(400).json({

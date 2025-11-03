@@ -2,6 +2,7 @@
 
 import { auth } from "@clerk/nextjs/server";
 import { UserFormSchema } from "@repo/types";
+import { revalidatePath } from "next/cache";
 
 export const getUsers = async () => {
   try {
@@ -84,6 +85,8 @@ export const createUser = async (dataUser: UserFormSchema) => {
 
     const data = await res.json();
 
+    revalidatePath("/users");
+
     console.log({ res, token, dataUser, data }, "<--createUserAction2");
 
     return data;
@@ -128,6 +131,8 @@ export const deleteUser = async (id: string) => {
     }
 
     const data = await res.json();
+
+    revalidatePath("/users");
 
     console.log({ token, id, res, data }, "<--deleteUserAction");
 

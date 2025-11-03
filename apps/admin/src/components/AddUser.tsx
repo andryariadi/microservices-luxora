@@ -39,14 +39,12 @@ const AddUser = () => {
     },
     onSuccess: () => {
       toast.success("User created successfully");
-      // form.reset();
+      form.reset();
     },
     onError: (error) => {
       toast.error(error.message);
     },
   });
-
-  console.log({ handleSubmitUser }, "<--addUserForm");
 
   return (
     <SheetContent>

@@ -48,7 +48,6 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
     },
     onSuccess: () => {
       toast.success("User(s) deleted successfully");
-      router.refresh();
     },
     onError: (error) => {
       toast.error(error.message);
@@ -62,7 +61,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
         <div className="flex justify-end">
           <button className="flex items-center gap-2 bg-red-500 text-white px-2 py-1 text-sm rounded-md m-4 cursor-pointer" onClick={() => mutation.mutate()} disabled={mutation.isPending}>
             <Trash2 className="w-4 h-4" />
-            {mutation.isPending ? "Deleting" : "Delete User(s)"}
+            {mutation.isPending ? "Deleting..." : "Delete User(s)"}
           </button>
         </div>
       )}

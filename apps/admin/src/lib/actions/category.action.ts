@@ -2,6 +2,29 @@
 
 import { auth } from "@clerk/nextjs/server";
 
+export const getCategories = async () => {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_PRODUCT_SERVICE_URL}/categories`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch categories");
+    }
+
+    const data = await res.json();
+
+    // console.log({ data }, "<--getCategoriesAction");
+
+    return data;
+  } catch (error) {
+    console.log("Failed fetch categories:", error);
+  }
+};
+
 export const createCategory = async ({ name, slug }: { name: string; slug: string }) => {
   try {
     const { getToken } = await auth();
@@ -22,10 +45,10 @@ export const createCategory = async ({ name, slug }: { name: string; slug: strin
 
     const data = await res.json();
 
-    console.log({ token, data }, "<--createCategory");
+    // console.log({ token, data }, "<--createCategory");
 
     return data;
   } catch (error) {
-    console.log("Failed create categories:", error);
+    console.log("Failed create category:", error);
   }
 };
