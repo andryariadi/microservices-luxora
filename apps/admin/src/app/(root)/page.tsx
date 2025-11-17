@@ -21,8 +21,8 @@ const CardListDynamic = dynamic(() => import("@/components/CardList"), {
 
 export default async function HomePage() {
   const ordersChart = await getOrdersChart();
-  const { orders: lateTransactions } = await getAllOrders(5);
-  const { data: popularProducts } = await getProducts({ limit: 5, popular: true });
+  const { orders: lateTransactions } = (await getAllOrders(5)) || { orders: [] };
+  const { data: popularProducts } = (await getProducts({ limit: 5, popular: true })) || { data: [] };
   // const popularProducts = await getPopularProducts();
 
   // console.log({ ordersChart, lateTransactions, popularProducts }, "<--homePage");

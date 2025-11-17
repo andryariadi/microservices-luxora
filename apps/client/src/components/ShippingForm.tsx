@@ -57,7 +57,7 @@ const ShippingForm = ({ setShippingForm }: { setShippingForm: (data: ShippingFor
         <label htmlFor="address" className="text-xs text-gray-500 font-medium">
           Address
         </label>
-        <input className="border-b border-gray-200 py-2 outline-none text-sm" type="text" id="address" placeholder="123 Main St, Anytown" {...register("address")} value="Jl. H. Hasanudin" />
+        <input className="border-b border-gray-200 py-2 outline-none text-sm" type="text" id="address" placeholder="123 Main St, Anytown" {...register("address")} value="Jl. H Sultan Hasanudin" />
         {errors.address && <p className="text-xs text-red-500">{errors.address.message}</p>}
       </div>
 
@@ -66,7 +66,7 @@ const ShippingForm = ({ setShippingForm }: { setShippingForm: (data: ShippingFor
         <label htmlFor="city" className="text-xs text-gray-500 font-medium">
           City
         </label>
-        <input className="border-b border-gray-200 py-2 outline-none text-sm" type="text" id="city" placeholder="New York" {...register("city")} value="Balikpapan" />
+        <input className="border-b border-gray-200 py-2 outline-none text-sm" type="text" id="city" placeholder="New York" {...register("city")} value="Balikpapan City" />
         {errors.city && <p className="text-xs text-red-500">{errors.city.message}</p>}
       </div>
 

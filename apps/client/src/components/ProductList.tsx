@@ -13,7 +13,7 @@ const ProductList = async ({ isShowFilter, category, sort, search, params }: { i
 
   // if (!products) return <div className="min-h-[calc(100vh-64px)] flex items-center justify-center">Products not found!</div>;
 
-  console.log({ products }, "<---productList");
+  // console.log({ products }, "<---productList");
 
   return (
     <section className="b-fuchsia-500 space-y-5">

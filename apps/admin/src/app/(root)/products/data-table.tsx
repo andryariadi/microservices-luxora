@@ -1,12 +1,14 @@
 "use client";
 
 import { ColumnDef, flexRender, getCoreRowModel, getPaginationRowModel, getSortedRowModel, SortingState, useReactTable } from "@tanstack/react-table";
-
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { DataTablePagination } from "@/components/TablePagination";
 import { useState } from "react";
 import { Trash2 } from "lucide-react";
-import { size } from "zod";
+import { useMutation } from "@tanstack/react-query";
+import { deleteProduct } from "@/lib/actions/product.action";
+import { toast } from "react-toastify";
+import { ProductType } from "@repo/types";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -31,14 +33,34 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
     },
   });
 
+  const mutation = useMutation({
+    mutationFn: async () => {
+      const selectedRows = table.getSelectedRowModel().rows;
+
+      Promise.all(
+        selectedRows.map(async (row) => {
+          const productId = (row.original as ProductType).id;
+
+          await deleteProduct(productId);
+        })
+      );
+    },
+    onSuccess: () => {
+      toast.success("Product(s) deleted successfully");
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
   return (
     <div className="rounded-md border">
       {/* Delete Button */}
       {Object.keys(rowSelection).length > 0 && (
         <div className="flex justify-end">
-          <button className="flex items-center gap-2 bg-red-500 text-white px-2 py-1 text-sm rounded-md m-4 cursor-pointer">
+          <button className="flex items-center gap-2 bg-red-500 text-white px-2 py-1 text-sm rounded-md m-4 cursor-pointer" onClick={() => mutation.mutate()} disabled={mutation.isPending}>
             <Trash2 className="w-4 h-4" />
-            Delete Product(s)
+            {mutation.isPending ? "Deleting..." : "Delete Product(s)"}
           </button>
         </div>
       )}
@@ -49,8 +71,6 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
-                console.log({ header, size: header.getSize() });
-
                 return (
                   <TableHead
                     key={header.id}

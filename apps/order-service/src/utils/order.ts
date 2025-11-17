@@ -15,6 +15,8 @@ export const createOrder = async (order: OrderType) => {
         status: order.status,
       },
     });
+
+    console.log({ newOrder, order }, "<---createOrder");
   } catch (error) {
     console.log("Failed create order:", error);
     throw error;

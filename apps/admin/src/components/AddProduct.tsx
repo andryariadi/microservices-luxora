@@ -120,8 +120,8 @@ const AddProduct = () => {
 
       return res;
     },
-    onSuccess: () => {
-      toast.success("Product created successfully");
+    onSuccess: (data) => {
+      if (data) toast.success(data.message);
       form.reset();
     },
     onError: (error) => {
@@ -134,12 +134,19 @@ const AddProduct = () => {
 
     const updatedVariants = [...variants];
 
-    updatedVariants[index] = {
-      ...updatedVariants[index],
-      [field]: value,
-    };
-    form.setValue("variants", updatedVariants);
+    console.log({ updatedVariants, index }, "<---updateVariants");
+
+    if (updatedVariants[index]) {
+      updatedVariants[index] = {
+        ...updatedVariants[index],
+        [field]: value,
+      };
+
+      form.setValue("variants", updatedVariants);
+    }
   };
+
+  console.log({ variantWatch: form.watch("variants") }, "<-----addproductform");
 
   return (
     <SheetContent className="w-full max-w-2xl">
@@ -353,9 +360,10 @@ const AddProduct = () => {
                 )}
 
                 {/* Variants */}
-                {form.watch("variants") && form.watch("variants")!.length > 0 && (
+                {form.watch("variants")?.length > 0 && (
                   <div className="space-y-4">
                     <FormLabel>Product Variants</FormLabel>
+
                     <div className="space-y-4 max-h-60 overflow-y-auto p-2 border rounded-md scrollbar">
                       {form.watch("variants")!.map((variant, index) => (
                         <div key={`${variant.size}-${variant.color}-${index}`} className="p-3 border rounded-md space-y-3">

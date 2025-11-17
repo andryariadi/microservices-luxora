@@ -2,6 +2,7 @@
 
 import { auth } from "@clerk/nextjs/server";
 import { ProductFormSchema } from "@repo/types";
+import { revalidatePath } from "next/cache";
 
 export const getProducts = async ({ limit, popular }: { limit?: number; popular?: boolean }) => {
   try {
@@ -62,7 +63,39 @@ export const createProduct = async (dataProduct: ProductFormSchema) => {
 
     const data = await res.json();
 
+    revalidatePath("/");
+
     console.log({ data }, "<---createProductAction2");
+
+    return data;
+  } catch (error) {
+    console.log("Failed fetch products:", error);
+  }
+};
+
+export const deleteProduct = async (id: string) => {
+  try {
+    const { getToken } = await auth();
+    const token = await getToken();
+
+    if (!token) {
+      throw new Error("User is not authenticated");
+    }
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_PRODUCT_SERVICE_URL}/products/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const data = await res.json();
+
+    revalidatePath("/");
 
     return data;
   } catch (error) {
